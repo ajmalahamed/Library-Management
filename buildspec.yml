@@ -11,25 +11,23 @@ phases:
        - aws ecr get-login-password --region us-west-2 | docker login --username AWS --password-stdin 860061945305.dkr.ecr.us-west-2.amazonaws.com
        - IMAGE_NAME=library-eureka-server
        - IMAGE_URI=860061945305.dkr.ecr.us-west-2.amazonaws.com/library-eureka-server:latest
-       - CONTAINER_NAME=library-eureka-server
+       - CONTAINER_NAME=practice-jpa
       
   build:
     commands:
-    - echo Build started on `date`
-    - echo $IMAGE_NAME
-    - mvn clean package -Ddockerfile.skip
-    - docker build -t $IMAGE_NAME .
-
+      - echo Build started on `date`
+      - echo Building java
+      - cd eureka-server
+      - mvn clean package
+      - echo Building the docker image
+      - docker build -t eureka-server .
+      - docker tag eureka-server 941516478045.dkr.ecr.$AWS_REGION.amazonaws.com/pod4-service-registry:eureka-server
   post_build:
     commands:
-    - echo Build completed on `date`
-    - echo $(docker images)
-    - docker tag $IMAGE_NAME $IMAGE_URI
-    - echo Pushing docker image
-    - docker push $IMAGE_URI
-    - echo push completed
-    - printf '[{"name":"%s","imageUri":"%s"}]' $CONTAINER_NAME $IMAGE_URI > imagedefinitions.json
+      - echo Build completed on `date`
+      - docker push 941516478045.dkr.ecr.$AWS_REGION.amazonaws.com/pod4-service-registry:eureka-server
+      - echo Writing definition files
+      - printf '[{"name":"ij028-pod4-eureka-server-container","imageUri":"%s"}]' 941516478045.dkr.ecr.$AWS_REGION.amazonaws.com/pod4-service-registry:eureka-server > taskdefinition.json
 
 artifacts:
-  files:
-  - imagedefinitions.json
+  files: eureka-server/taskdefinition.json

@@ -1,6 +1,4 @@
 FROM openjdk:17
-VOLUME /tmp
 EXPOSE 8761
-ADD target/*.jar app.jar
-ENV JAVA_OPTS=""
-ENTRYPOINT [ "sh", "-c", "java $JAVA_OPTS -Djava.security.egd=file:/dev/./urandom -jar /app.jar" ]
+ADD "target/eureka-server.jar" "eureka-server.jar"
+ENTRYPOINT [ "java", "-jar", "/eureka-server.jar" ]
