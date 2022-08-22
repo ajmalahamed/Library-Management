@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: com.cts.eurekaserver.EurekaServerApplicationTests
+-------------------------------------------------------------------------------
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 13.554 s - in com.cts.eurekaserver.EurekaServerApplicationTests
