@@ -11,7 +11,7 @@ phases:
        - aws ecr get-login-password --region us-west-2 | docker login --username AWS --password-stdin 860061945305.dkr.ecr.us-west-2.amazonaws.com
        - IMAGE_NAME=library-eureka-server
        - IMAGE_URI=860061945305.dkr.ecr.us-west-2.amazonaws.com/library-eureka-server:latest
-       - CONTAINER_NAME=practice-jpa
+       - CONTAINER_NAME=eureka-server
       
   build:
     commands:
@@ -30,4 +30,5 @@ phases:
       - printf '[{"name":"ij028-pod4-eureka-server-container","imageUri":"%s"}]' 941516478045.dkr.ecr.$AWS_REGION.amazonaws.com/pod4-service-registry:eureka-server > taskdefinition.json
 
 artifacts:
-  files: eureka-server/taskdefinition.json
+  files: 
+  - imagedefinition.json
