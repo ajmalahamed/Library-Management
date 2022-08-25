@@ -4,8 +4,8 @@ Resources:
   - TargetService:
       Type: AWS::ECS::Service
       Properties:
-        TaskDefinition: "arn:aws:ecs:us-west-2:860061945305:task-definition/eureka-server-run:1"
+        TaskDefinition: "arn:aws:ecs:ap-south-1:860061945305:task-definition/lib-eureka-server:1"
         LoadBalancerInfo:
-          ContainerName: "eureka-server"
+          ContainerName: "lib-eureka-server"
           ContainerPort: "8761"
         PlatformVersion: "LATEST"
